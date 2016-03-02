@@ -7,6 +7,8 @@ It provides extensible set of operators which allow to describe any possible sid
 
 ## Usage
 
+Check complete example [here](http://www.funda.nl/koop/amsterdam/appartement-49631511-wijnand-nuijenstraat-132/)
+
 ````js
 import { createStore, applyMiddleware } from 'redux';
 import { createYieldEffectMiddleware } from 'redux-yield-effect';
