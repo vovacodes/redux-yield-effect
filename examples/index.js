@@ -2,10 +2,7 @@ import 'babel-polyfill';
 import { createStore, applyMiddleware } from 'redux';
 
 import { createYieldEffectMiddleware } from '../';
-import put from '../lib/effects/put';
-import call from '../lib/effects/call';
-import fork from '../lib/effects/fork';
-import join from '../lib/effects/join';
+import { put, call, fork, join } from '../lib/effects';
 
 const noopReducer = (state = {}, action) => state;
 
@@ -31,19 +28,25 @@ store.dispatch(orderProduct('PRDCT_ID_1122', 'USR_ID_9999'))
 // main business logic coroutine
 function* orderProduct(productId, userId) {
   // load user address and product price in the background
+  // "fork" calls a function or a coroutine and continues execution without waiting for a result
+  // we will "join" that result later
   const fetchUserAddressFromDBTask = yield fork(fetchUserAddressFromDB, userId);
   const fetchProductPriceFromDBTask = yield fork(fetchProductPriceFromDB, userId);
 
   try {
     // reserve the product
+    // "call" calls a function or a coroutine and waits until it asynchronously resolves
     yield call(reserveProduct, productId);
 
     // fetch user payment information
     const userPaymentDetails = yield call(fetchUserPaymentDetails, userId);
+    // "put" dispatches action
     yield put({ type: 'UPDATE_USER_CARD_NUMBER', payload: userPaymentDetails.cardNumber });
 
     // make the payment
+    // here we "join" the result of the previously called function "fetchProductPriceFromDB", so wait until it is done
     const { price } = yield join(fetchProductPriceFromDBTask);
+    // here we "call" a coroutine (another generator that yields declarative effects)
     yield call(makePayment, userPaymentDetails.cardNumber, price);
 
     // add shipping address and complete order
@@ -54,6 +57,8 @@ function* orderProduct(productId, userId) {
 
     return order;
   } catch (error) {
+    // if any of the yielded effects from the "try" block fails, we could catch that error here
+
     // cancel product reservation and report error
     yield call(cancelProductReservation, productId);
     yield put({ type: 'ORDER_FAILED', error });
