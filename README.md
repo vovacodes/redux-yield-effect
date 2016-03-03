@@ -83,3 +83,9 @@ function* makePayment(cardNumber, amount) {
   yield put({ type: 'PAYMENT_COMPLETE' });
 }
 ````
+
+## How it works
+Each effect creator (`put`, `call`, etc.) instead of performing real side effect returns just a plain object that describes the effect. For example `call(myApiService, 123, 'foo')` will produce `{ type: 'YIELD_EFFECT_CALL', payload: { func: myApiService, args: [123, 'foo'] } }`.
+When `yield`ed from an action creator this effect description is picked up by the middleware and handed over to a corresponding effect processor based on the `type` property. Effect processor performs that side effect and the eventual result/error of it is returned/thrown back to the action creator at the place the effect was `yield`ed from.
+
+This approach allows developer to write pure action creators that may define complex async execution flow yet being trivial to test.
