@@ -1,5 +1,5 @@
 # redux-yield-effect
-_Declarative side-effects for redux with generators_
+_Declarative side effects for redux with generators_
 
 __redux-yield-effect__ middleware allows to write action creators as easily testable side-effect free generators.
 
@@ -98,4 +98,30 @@ For example `call(myApiService, 123, 'foo')` will produce:
 ````
 When `yield`ed from an action creator this effect description is picked up by the middleware and handed over to a corresponding effect processor based on the `type` property. Effect processor performs that side effect and the eventual result/error of it is returned/thrown back to the action creator at the place the effect was `yield`ed from.
 
-This approach allows developer to write pure action creators that may define complex async execution flow yet being trivial to test.
+This approach allows developer to write pure action creators that may define complex business logic with async execution flow, yet being trivial to test.
+
+## API
+
+#### `createYieldEffectMiddleware(customEffectProcessors?): Function`
+Creates _redux_ middleware that handles effect coroutines.
+- `customEffectProcessors: { [effectType: string]: [effectProcessor: Function] }` - `optional` - object that specifies the  mapping between custom effect's type and effectProcessor function. This allows to create and use your own or third party effect creators with __redux-yield-effect__
+
+### Effect creators
+
+#### `call(func, ...args): Effect`
+Creates an Effect that when performed should call `func` with `args` as arguments. When Effect `yield`ed, if `func` is a normal function, coroutine is suspended until the Promise returned by `func` fulfilled. If `func` is an effect coroutine then  execution waits until coroutine returns.
+- `func: Function = () => {Promise} | GeneratorFunction` - function or effect coroutine
+- `args: Array` - arguments to call `func` with
+
+#### `fork(func, ...args): Effect`
+Creates an Effect that when performed should call `func` with `args` as arguments. Unlike `call` doesn't suspend the execution flow, but instantly returns a Task object, that could further be used with `join` effect creator to get the result of function call.
+- `func: Function = () => {Promise} | GeneratorFunction` - function or effect coroutine
+- `args: Array` - arguments to call `func` with
+
+#### `join(task): Effect`
+Creates an Effect that when performed suspends the execution flow until previously forked `task` is finished.
+- `task` - object returned from a previous `fork` call
+
+#### `put(action): Effect`
+Creates an Effect that when performed dispatches the `action` with redux's `store.dispatch` method.
+- `action: Action` - action to dispatch
