@@ -2,7 +2,7 @@ import invariant from 'invariant';
 import isPlainObject from 'lodash/isPlainObject';
 import isPromise from 'is-promise';
 
-export const TYPE = 'YIELD_EFFECT_JOIN';
+export const TYPE = '__YIELD_EFFECT_JOIN__';
 
 export function processor(effect) {
   const { task } = effect.payload;

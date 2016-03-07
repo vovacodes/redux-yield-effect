@@ -1,7 +1,7 @@
 import invariant from 'invariant';
 import isPlainObject from 'lodash/isPlainObject';
 
-export const TYPE = 'YIELD_EFFECT_PUT';
+export const TYPE = '__YIELD_EFFECT_PUT__';
 
 export function processor(effect, { dispatch }) {
   const { action } = effect.payload;

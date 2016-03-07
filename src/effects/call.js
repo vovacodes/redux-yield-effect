@@ -3,7 +3,7 @@ import isFunction from 'lodash/isFunction';
 import { fn as isGeneratorFunction } from 'is-generator';
 import isPromise from 'is-promise';
 
-export const TYPE = 'YIELD_EFFECT_CALL';
+export const TYPE = '__YIELD_EFFECT_CALL__';
 
 export function processor(effect, { dispatch, effectGeneratorProcessor }) {
   const { func, args } = effect.payload;
