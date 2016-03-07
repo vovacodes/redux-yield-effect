@@ -5,6 +5,10 @@ __redux-yield-effect__ middleware allows to write action creators as easily test
 
 It provides extensible set of operators which allow to describe any possible side effect (API service call, action dispatch, etc.) as a plain javascript object that is handled and executed on the level of middleware, so that user code remains side-effect free.
 
+## Installation
+
+`npm install --save redux-yield-effect`
+
 ## Usage
 
 Check complete example [here](https://github.com/wizardzloy/redux-yield-effect/blob/master/examples/index.js)
