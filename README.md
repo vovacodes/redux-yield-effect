@@ -125,3 +125,54 @@ Creates an Effect that when performed suspends the execution flow until previous
 #### `put(action): Effect`
 Creates an Effect that when performed dispatches the `action` with redux's `store.dispatch` method.
 - `action: Action` - action to dispatch
+
+### Custom effect creators
+
+It is possible to create your own custom effect creators. Let's learn how to make it by example
+````js
+// ======================== log.js ==========================
+// In order to create a custom effect creator you need to define three things:
+
+// 1. string constant, that represents the type of the Effect
+export const TYPE = '__YIELD_EFFECT_LOG__';
+
+// 2. effect creator - function that returns Effect description object
+export default function log(message) {
+    return {
+        type: TYPE,
+        payload: {
+            message: message
+        }
+        
+    };
+}
+
+// 3. effect processor - function that knows how to process certain Effect.
+// It should always return Promise
+export function processor(effect, { dispatch, effectGeneratorProcessor }) {
+    const message = effect.payload.message;
+    
+    return Promise.resolve().then(() => { console.log(message); });
+}
+
+// ======================= main.js ==========================
+import log, { TYPE as LOG_EFFECT_TYPE, processor as logEffectProcessor } from './log';
+import { createStore, applyMiddleware } from 'redux';
+import { createYieldEffectMiddleware } from 'redux-yield-effect';
+
+// Now we should let middleware know how to handle our Effect:
+const yieldEffectMiddleware = createYieldEffectMiddleware({
+    [LOG_EFFECT_TYPE]: logEffectProcessor
+});
+
+const store = createStore(
+    reducer,
+    applyMiddleware(yieldEffectMiddleware) // apply redux-yield-effect middleware
+);
+
+store.dispatch(function* () {
+    // now you can use your custom effect creator in your effect coroutine
+    yield log('this will be logged in the "logEffectProcessor".');
+});
+
+````
