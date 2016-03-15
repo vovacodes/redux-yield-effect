@@ -5,6 +5,14 @@ __redux-yield-effect__ middleware allows to write action creators as easily test
 
 It provides extensible set of operators which allow to describe any possible side effect (API service call, action dispatch, etc.) as a plain javascript object that is handled and executed on the level of middleware, so that user code remains side-effect free.
 
+## Motivation
+
+This library is strongly inspired by the awesome __redux-saga__ project. Actually the API of the __redux-yield-effect__
+almost completely copies one from the __redux-saga__. But even though these libs have a lot of similarities, they are 
+different in a very important aspect - the way of kicking off the effect generators. __redux-saga__ promotes the approach of 
+long-running daemon processes that are listening to an action/event to start/resume execution, whereas in __redux-yield-effect__
+you kick off the effect generator by simply dispatching it (approach similar to the __redux-thunk__).
+
 ## Installation
 
 `npm install --save redux-yield-effect`
