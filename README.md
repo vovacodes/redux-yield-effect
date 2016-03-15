@@ -7,11 +7,12 @@ It provides extensible set of operators which allow to describe any possible sid
 
 ## Motivation
 
-This library is strongly inspired by the awesome __redux-saga__ project. Actually the API of the __redux-yield-effect__
+This library is strongly inspired by the awesome [__redux-saga__](https://github.com/yelouafi/redux-saga) project. Actually the API of the __redux-yield-effect__
 almost completely copies one from the __redux-saga__. But even though these libs have a lot of similarities, they are 
 different in a very important aspect - the way of kicking off the effect generators. __redux-saga__ promotes the approach of 
 long-running daemon processes that are listening to an action/event to start/resume execution, whereas in __redux-yield-effect__
 you kick off the effect generator by simply dispatching it (approach similar to the __redux-thunk__).
+You may read more about the motivation behind it [here](https://github.com/yelouafi/redux-saga/issues/123).
 
 ## Installation
 
