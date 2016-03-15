@@ -11,6 +11,17 @@
   },
   "author": "Vladimir Guguiev <wizardzloy@gmail.com>",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wizardzloy/redux-yield-effect.git"
+  },
+  "tags": [
+    "redux",
+    "side effects",
+    "middleware",
+    "generators",
+    "effects"
+  ],
   "dependencies": {
     "invariant": "^2.2.0",
     "is-generator": "^1.0.2",
