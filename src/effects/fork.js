@@ -38,7 +38,7 @@ export default function fork(func, ...args) {
     type: TYPE,
     payload: {
       func,
-      args
-    }
+      args,
+    },
   };
 }

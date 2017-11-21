@@ -1,7 +1,10 @@
 {
-  "extends": "airbnb/base",
+  "extends": ["airbnb/base", "plugin:jest/recommended"],
+  "plugins": ["jest"],
+  "env": {
+    "jest/globals": true
+  },
   "rules": {
-    "comma-dangle": [2, "never"],
     "max-len": [2, 120, 2],
     "no-use-before-define": [2, { "functions": false }]
   }

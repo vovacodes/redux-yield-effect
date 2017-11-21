@@ -20,7 +20,7 @@ export default function join(task) {
   return {
     type: TYPE,
     payload: {
-      task
-    }
+      task,
+    },
   };
 }

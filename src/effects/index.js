@@ -7,5 +7,5 @@ export {
   call,
   put,
   fork,
-  join
+  join,
 };
