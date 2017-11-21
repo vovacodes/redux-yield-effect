@@ -122,8 +122,8 @@ Creates _redux_ middleware that handles effect coroutines.
 ### Effect creators
 
 #### `call(func, ...args): Effect`
-Creates an Effect that when performed should call `func` with `args` as arguments. When Effect `yield`ed, if `func` is a normal function, coroutine is suspended until the Promise returned by `func` fulfilled. If `func` is an effect coroutine then  execution waits until coroutine returns.
-- `func: Function = () => {Promise} | GeneratorFunction` - function or effect coroutine
+Creates an Effect that when performed should call `func` with `args` as arguments. When Effect `yield`ed, if `func` is a normal function, coroutine is suspended until the Promise returned by `func` fulfilled. If `func` is an effect coroutine then execution waits until coroutine returns.
+- `func: Function = () => {Promise<any> | any} | GeneratorFunction` - function or effect coroutine
 - `args: Array` - arguments to call `func` with
 
 #### `fork(func, ...args): Effect`
