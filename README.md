@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/wzrdzl/redux-yield-effect.svg?style=shield)](https://circleci.com/gh/wzrdzl/redux-yield-effect)
+
 # redux-yield-effect
 _Declarative side effects for redux with generators_
 
