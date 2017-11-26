@@ -17,7 +17,7 @@ export default function put(action) {
   return {
     type: TYPE,
     payload: {
-      action
-    }
+      action,
+    },
   };
 }

@@ -14,18 +14,20 @@ export function processor(effect, { dispatch, effectGeneratorProcessor }) {
     // func is an effect generator
     promise = effectGeneratorProcessor(func(...args), { dispatch });
   } else {
-    promise = func(...args);
+    promise = Promise.resolve().then(() => func(...args));
   }
 
   return promise;
 }
 
 export default function call(func, ...args) {
+  invariant(isFunction(func), `"func" argument must be a function, but received ${func}`);
+
   return {
     type: TYPE,
     payload: {
       func,
-      args
-    }
+      args,
+    },
   };
 }
