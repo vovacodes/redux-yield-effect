@@ -43,8 +43,8 @@ jobs:
       - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
 
       - run:
-        name: Publish package to NPM
-        command: npm publish
+          name: Publish package to NPM
+          command: npm publish
 
 
 workflows:
