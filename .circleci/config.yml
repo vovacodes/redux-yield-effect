@@ -2,13 +2,15 @@
 #
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
+defaults: &defaults
+  docker:
+    - image: node:8
+  working_directory: ~/repo
+
 version: 2
 jobs:
   build:
-    docker:
-      - image: node:8
-
-    working_directory: ~/repo
+    <<: *defaults
 
     steps:
       - checkout
@@ -29,17 +31,25 @@ jobs:
 
       # run build to ensure the code is compiling
       - run: npm run build
+      
+      - persist_to_workspace:
+          # Must be an absolute path, or relative path from working_directory
+          root: ~/
+          # Must be relative path from root
+          paths:
+            - repo
 
       # run tests!
       - run: npm test
 
   publish:
-    docker:
-      - image: node:8
-
-    working_directory: ~/repo
+    <<: *defaults
 
     steps:
+      - attach_workspace:
+          # Must be absolute path or relative path from working_directory
+          at: ~/repo
+    
       - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
 
       - run:
