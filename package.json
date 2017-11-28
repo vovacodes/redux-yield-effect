@@ -6,16 +6,16 @@
   "scripts": {
     "commitmsg": "commitlint -e $GIT_PARAMS",
     "precommit": "npm run lint",
-    "prepush": "npm run test",
+    "prepush": "npm test",
     "prepublish": "npm run build",
     "version": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
-    "bump": "npm version $(conventional-recommended-bump -p angular)",
     "build": "babel src -d lib --ignore *.spec.js",
     "build:watch": "npm run build -- -w",
     "lint": "eslint src/**/*.js",
     "test": "jest",
     "cmt": "commit",
-    "release": "npm run bump"
+    "prerelease": "npm test",
+    "release": "npm version $(conventional-recommended-bump -p angular)"
   },
   "author": "Vladimir Guguiev <wizardzloy@gmail.com>",
   "license": "ISC",
