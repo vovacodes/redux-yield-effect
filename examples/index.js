@@ -1,28 +1,33 @@
-import 'babel-polyfill';
-import { createStore, applyMiddleware } from 'redux';
+const { createStore, applyMiddleware } = require('redux');
 
-import { createYieldEffectMiddleware } from '../';
-import { put, call, fork, join } from '../lib/effects';
+const { createYieldEffectMiddleware } = require('../');
+const {
+  put,
+  call,
+  fork,
+  join,
+} = require('../lib/effects');
 
-const noopReducer = (state = {}, action) => state;
 
-const simpleActionLoggerMiddleware = () => (next) => (action) => {
+const noopReducer = (state = {}) => state;
+
+const simpleActionLoggerMiddleware = () => next => (action) => {
   console.log('Received action:', action);
   console.log('========================');
   return next(action);
 };
 
 const store = createStore(
-    noopReducer,
-    applyMiddleware(createYieldEffectMiddleware(), simpleActionLoggerMiddleware)
+  noopReducer,
+  applyMiddleware(createYieldEffectMiddleware(), simpleActionLoggerMiddleware),
 );
 
 // dispatch business logic coroutine
 store.dispatch(orderProduct('PRDCT_ID_1122', 'USR_ID_9999'))
-    .then(
-        (order) => console.log('orderProduct result:', order),
-        (error) => console.error('order failed with error', error)
-    );
+  .then(
+    order => console.log('orderProduct result:', order),
+    error => console.error('order failed with error', error),
+  );
 
 
 // main business logic coroutine
