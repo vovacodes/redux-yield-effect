@@ -1,6 +1,6 @@
 {
   "name": "redux-yield-effect",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Declarative side-effects for redux with generators",
   "main": "lib/index.js",
   "scripts": {
