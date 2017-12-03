@@ -37,7 +37,7 @@ jobs:
           root: ./
           # Must be relative path from root
           paths:
-            - *
+            - .
 
       # run tests!
       - run: npm test
