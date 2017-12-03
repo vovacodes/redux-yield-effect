@@ -50,6 +50,8 @@ jobs:
           # Must be absolute path or relative path from working_directory
           at: ~/repo
     
+      - run: pwd
+      
       - run: ls -la
       
   publish:
