@@ -1,10 +1,10 @@
 import invariant from 'invariant';
 import isGenerator from 'is-generator';
 import isPromise from 'is-promise';
-import put, { TYPE as PUT_EFFECT_TYPE, processor as putEffectProcessor } from './effects/put';
-import call, { TYPE as CALL_EFFECT_TYPE, processor as callEffectProcessor } from './effects/call';
-import fork, { TYPE as FORK_EFFECT_TYPE, processor as forkEffectProcessor } from './effects/fork';
-import join, { TYPE as JOIN_EFFECT_TYPE, processor as joinEffectProcessor } from './effects/join';
+import { TYPE as PUT_EFFECT_TYPE, processor as putEffectProcessor } from './effects/put';
+import { TYPE as CALL_EFFECT_TYPE, processor as callEffectProcessor } from './effects/call';
+import { TYPE as FORK_EFFECT_TYPE, processor as forkEffectProcessor } from './effects/fork';
+import { TYPE as JOIN_EFFECT_TYPE, processor as joinEffectProcessor } from './effects/join';
 
 /**
  *
@@ -17,7 +17,7 @@ export default function createYieldEffectMiddleware(customEffectProcessors = {})
     [CALL_EFFECT_TYPE]: callEffectProcessor,
     [FORK_EFFECT_TYPE]: forkEffectProcessor,
     [JOIN_EFFECT_TYPE]: joinEffectProcessor,
-    ...customEffectProcessors
+    ...customEffectProcessors,
   };
 
   const effectGeneratorProcessor = createEffectGeneratorProcessor(effectProcessors);
@@ -30,14 +30,11 @@ export default function createYieldEffectMiddleware(customEffectProcessors = {})
 
       return effectGeneratorProcessor(action, { dispatch });
     };
-  }
-
+  };
 }
 
 function createEffectGeneratorProcessor(effectProcessors) {
-
   return function effectGeneratorProcessor(effectGenerator, { dispatch }) {
-
     return Promise.resolve(handlePreviousEffectResult());
 
     function handlePreviousEffectResult(prevEffectResult) {
@@ -70,10 +67,9 @@ function createEffectGeneratorProcessor(effectProcessors) {
       invariant(isPromise(result), `effect processor should always return promise, but received: ${result}`);
 
       return result.then(
-          handlePreviousEffectResult,
-          handlePreviousEffectError
+        handlePreviousEffectResult,
+        handlePreviousEffectError,
       );
     }
-  }
-
+  };
 }

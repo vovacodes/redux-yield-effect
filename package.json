@@ -11,7 +11,7 @@
     "version": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
     "build": "babel src -d lib --ignore *.spec.js",
     "build:watch": "npm run build -- -w",
-    "lint": "eslint src/**/*.js",
+    "lint": "eslint src/",
     "test": "jest",
     "cmt": "commit",
     "prerelease": "npm test",

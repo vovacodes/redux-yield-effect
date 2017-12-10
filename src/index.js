@@ -1,5 +1,6 @@
 import createYieldEffectMiddleware from './createYieldEffectMiddleware';
 
 export {
-  createYieldEffectMiddleware
+  // eslint-disable-next-line import/prefer-default-export
+  createYieldEffectMiddleware,
 };

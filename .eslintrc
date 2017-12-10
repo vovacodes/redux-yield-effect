@@ -5,7 +5,8 @@
     "jest/globals": true
   },
   "rules": {
-    "max-len": [2, 120, 2],
-    "no-use-before-define": [2, { "functions": false }]
+    "max-len": ["error", 120, 2],
+    "no-use-before-define": ["error", { "functions": false }],
+    "arrow-parens": "off"
   }
 }
