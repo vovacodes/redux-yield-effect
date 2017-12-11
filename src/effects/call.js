@@ -14,7 +14,10 @@ export function processor(effect, { dispatch, effectGeneratorProcessor }) {
     // func is an effect generator
     promise = effectGeneratorProcessor(func(...args), { dispatch });
   } else {
-    promise = Promise.resolve().then(() => func(...args));
+    promise = func(...args);
+    if (!promise.then) {
+      promise = Promise.resolve(promise);
+    }
   }
 
   return promise;

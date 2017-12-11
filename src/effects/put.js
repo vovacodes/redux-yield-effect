@@ -8,9 +8,7 @@ export function processor(effect, { dispatch }) {
 
   invariant(isPlainObject(action), `"put" only supports dispatching plain object actions, but received ${action}`);
 
-  return Promise.resolve().then(() => {
-    dispatch(action);
-  });
+  return Promise.resolve().then(() => dispatch(action));
 }
 
 export default function put(action) {
