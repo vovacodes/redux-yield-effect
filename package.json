@@ -4,7 +4,6 @@
   "description": "Declarative side-effects for redux with generators",
   "main": "lib/index.js",
   "scripts": {
-    "commitmsg": "commitlint -e $GIT_PARAMS",
     "precommit": "npm run lint",
     "prepush": "npm test",
     "prepublish": "npm run build",
@@ -37,7 +36,6 @@
     "lodash": "^4.17.4"
   },
   "devDependencies": {
-    "@commitlint/cli": "^5.0.1",
     "@commitlint/config-angular": "^4.3.0",
     "@commitlint/prompt-cli": "^5.0.1",
     "babel-cli": "^6.26.0",
