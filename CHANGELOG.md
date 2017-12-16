@@ -1,3 +1,13 @@
+<a name="1.1.0"></a>
+# [1.1.0](https://github.com/wizardzloy/redux-yield-effect/compare/v1.0.3...v1.1.0) (2017-12-16)
+
+
+### Features
+
+* **put:** put returns the result of the dispatch() call ([eacf6dd](https://github.com/wizardzloy/redux-yield-effect/commit/eacf6dd))
+
+
+
 <a name="1.0.3"></a>
 ## [1.0.3](https://github.com/wizardzloy/redux-yield-effect/compare/v1.0.2...v1.0.3) (2017-12-03)
 
