@@ -23,7 +23,7 @@ You may read more about the motivation behind it [here](https://github.com/yelou
 
 ## Usage
 
-Check complete example [here](https://github.com/wizardzloy/redux-yield-effect/blob/master/examples/index.js)
+Check an example [here](https://github.com/wzrdzl/redux-yield-effect/blob/master/src/index.spec.js)
 
 ````js
 import { createStore, applyMiddleware } from 'redux';
