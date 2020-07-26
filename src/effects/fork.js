@@ -1,5 +1,4 @@
 import invariant from 'invariant';
-import isFunction from 'lodash/isFunction';
 import { fn as isGeneratorFunction } from 'is-generator';
 import isPromise from 'is-promise';
 
@@ -7,8 +6,6 @@ export const TYPE = '__YIELD_EFFECT_FORK__';
 
 export function processor(effect, { dispatch, effectGeneratorProcessor }) {
   const { func, args } = effect.payload;
-
-  invariant(isFunction(func), `"effect.payload.func" must be a function, but received ${func}`);
 
   let promise;
   if (isGeneratorFunction(func)) {
@@ -34,6 +31,8 @@ export function processor(effect, { dispatch, effectGeneratorProcessor }) {
  * @returns {Effect}
  */
 export default function fork(func, ...args) {
+  invariant(typeof func === 'function', `"effect.payload.func" must be a function, but received ${func}`);
+
   return {
     type: TYPE,
     payload: {

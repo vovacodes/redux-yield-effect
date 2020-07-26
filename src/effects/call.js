@@ -1,13 +1,10 @@
 import invariant from 'invariant';
-import isFunction from 'lodash/isFunction';
 import { fn as isGeneratorFunction } from 'is-generator';
 
 export const TYPE = '__YIELD_EFFECT_CALL__';
 
 export function processor(effect, { dispatch, effectGeneratorProcessor }) {
   const { func, args } = effect.payload;
-
-  invariant(isFunction(func), `"effect.payload.func" must be a function, but received ${func}`);
 
   let promise;
   if (isGeneratorFunction(func)) {
@@ -21,7 +18,7 @@ export function processor(effect, { dispatch, effectGeneratorProcessor }) {
 }
 
 export default function call(func, ...args) {
-  invariant(isFunction(func), `"func" argument must be a function, but received ${func}`);
+  invariant(typeof func === 'function', `first argument must be a function, but received ${func} | ${typeof func}`);
 
   return {
     type: TYPE,
