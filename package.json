@@ -4,16 +4,11 @@
   "description": "Declarative side-effects for redux with generators",
   "main": "lib/index.js",
   "scripts": {
-    "precommit": "npm run lint",
-    "prepush": "npm test",
-    "prepublish": "npm run build",
     "version": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
     "build": "babel src -d lib --ignore *.spec.js",
     "build:watch": "npm run build -- -w",
     "lint": "eslint src/",
     "test": "jest",
-    "cmt": "commit",
-    "prerelease": "npm test",
     "release": "npm version $(conventional-recommended-bump -p angular)"
   },
   "author": "Vladimir Guguiev <wizardzloy@gmail.com>",
@@ -32,8 +27,7 @@
   "dependencies": {
     "invariant": "^2.2.0",
     "is-generator": "^1.0.2",
-    "is-promise": "^2.1.0",
-    "lodash": "^4.17.4"
+    "is-promise": "^2.1.0"
   },
   "devDependencies": {
     "@commitlint/config-angular": "^4.3.0",

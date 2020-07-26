@@ -104,18 +104,6 @@ describe('call', () => {
           expect(rejectHandler).toBeCalledWith(nastyError);
         });
     });
-
-    it('should throw exception if `effect.payload.func` is not a function', () => {
-      const effect = {
-        TYPE,
-        payload: {
-          func: 'I am not a function',
-          args: [1, 2],
-        },
-      };
-
-      expect(() => processor(effect, {})).toThrowError(/"effect.payload.func" must be a function/);
-    });
   });
 });
 
