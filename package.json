@@ -1,15 +1,13 @@
 {
-  "name": "redux-yield-effect",
-  "version": "1.1.0",
+  "name": "rye-middleware",
+  "version": "1.2.0",
   "description": "Declarative side-effects for redux with generators",
   "main": "lib/index.js",
   "scripts": {
-    "version": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
     "build": "npx babel src -d lib --ignore *.spec.js",
     "build:watch": "npm run build -- -w",
     "lint": "eslint src/",
     "test": "jest",
-    "release": "npm version $(conventional-recommended-bump -p angular)"
   },
   "author": "Sophie McCarrell <sophie.mccarrell@gmail.com>",
   "license": "ISC",
