@@ -1,17 +1,22 @@
-[![CircleCI](https://circleci.com/gh/wzrdzl/redux-yield-effect.svg?style=shield)](https://circleci.com/gh/wzrdzl/redux-yield-effect)
-[![npm version](https://badge.fury.io/js/redux-yield-effect.svg)](https://badge.fury.io/js/redux-yield-effect)
-
-# redux-yield-effect
+# Rye Middleware
 _Declarative side effects for redux with generators_
 
-__redux-yield-effect__ middleware allows to write action creators as easily testable side-effect free generators.
+__RYE__ middleware allows to write action creators as easily testable side-effect free generators.
 
 It provides extensible set of operators which allow to describe any possible side effect (API service call, action dispatch, etc.) as a plain javascript object that is handled and executed on the level of middleware, so that user code remains side-effect free.
+
+## Distinction from Redux Yield Effect
+
+The original author Valdimir made the awesome library Redux Yield Effect. I contributed a little. Now it's 3 years later and I want to make bigger changes and i don't want to bother the original author. Further, I wanted to add unit tests to my changes, but found it difficult with how the code was written. With this in mind, I decided to rewrite the core code of the library, so I could more cleanly unit test it.
+No more anonymous inaccessible functions in functions.
+The new feature that drove me to re-write the project was the ability to end generators early. So after a generator is dispatched, an action to end it early is returned. This is a breaking change:
+ - the old library returned a promise of the returned value of the generator that was dispatched.
+ - This new library returns an action that allows the user to end the generator early.
 
 ## Motivation
 
 This library is strongly inspired by the awesome [__redux-saga__](https://github.com/yelouafi/redux-saga) project. Actually the API of the __redux-yield-effect__
-almost completely copies one from the __redux-saga__. But even though these libs have a lot of similarities, they are 
+almost completely copies one from the __redux-saga__. But even though these libs have a lot of similarities, they are
 different in a very important aspect - the way of kicking off the effect generators. __redux-saga__ promotes the approach of 
 long-running daemon processes that are listening to an action/event to start/resume execution, whereas in __redux-yield-effect__
 you kick off the effect generator by simply dispatching it (approach similar to the __redux-thunk__).
