@@ -5,7 +5,14 @@
     "jest/globals": true
   },
   "rules": {
-    "max-len": ["error", 120, 2],
-    "arrow-parens": "off"
+    "max-len": ["warn", 120, 2],
+    "no-use-before-define": "off",
+    "arrow-parens": "off",
+    "no-plusplus": "off",
+    "no-else-return": "off",
+    "no-param-reassign": "off",
+    "no-shadow": "off",
+    "import/prefer-default-export": "off",
+    "prefer-template": "off"
   }
 }

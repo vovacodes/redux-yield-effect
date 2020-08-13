@@ -1,13 +1,13 @@
 import { createStore, applyMiddleware } from 'redux';
 
-import { createYieldEffectMiddleware } from './index';
+import { createRyeMiddleware } from './newRye';
 import { put, call, fork, join } from './effects/index';
 
 
 const noopReducer = (state = {}) => state;
 const store = createStore(
   noopReducer,
-  applyMiddleware(createYieldEffectMiddleware()),
+  applyMiddleware(createRyeMiddleware()),
 );
 
 describe('redux-yield-effect examples', () => {
@@ -75,11 +75,9 @@ describe('redux-yield-effect examples', () => {
   }
 
   it('should return a resolved promise with the result of the successful business logic execution', async () => {
-    expect.assertions(1);
+    const { result, endGeneratorAction } = store.dispatch(orderProduct('PRDCT_ID_1122', 'USR_ID_9999', true));
 
-    const order = await store.dispatch(orderProduct('PRDCT_ID_1122', 'USR_ID_9999', true));
-
-    expect(order).toEqual({
+    expect(await result).toEqual({
       orderId: 'ORD_ID_4242',
       productId: 'PRDCT_ID_1122',
       userId: 'USR_ID_9999',
@@ -88,8 +86,6 @@ describe('redux-yield-effect examples', () => {
   });
 
   it('should return a rejected promise with an error thrown during the execution of the business logic', async () => {
-    expect.assertions(1);
-
     try {
       await store.dispatch(orderProduct('PRDCT_ID_1122', 'USR_ID_9999', false));
     } catch (error) {

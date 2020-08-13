@@ -1,26 +1,17 @@
 import invariant from 'invariant';
 import { fn as isGeneratorFunction } from 'is-generator';
-import isPromise from 'is-promise';
 
 export const TYPE = '__YIELD_EFFECT_FORK__';
 
-export function processor(effect, { dispatch, effectGeneratorProcessor }) {
+export function processor(effect, { effectGeneratorProcessor }) {
   const { func, args } = effect.payload;
 
-  let promise;
   if (isGeneratorFunction(func)) {
-    // func is an effect generator
-    promise = effectGeneratorProcessor(func(...args), { dispatch });
+    return Promise.resolve(effectGeneratorProcessor(func(...args)));
   } else {
-    promise = func(...args);
-
-    invariant(isPromise(promise), `"effect.payload.func" must return a promise, but received ${promise}`);
+    // returning { result }, to mimic effectGeneratorProcessor.
+    return Promise.resolve({ result: func(...args) });
   }
-
-  // wrap result of the function invocation into an object
-  // to prevent middleware from waiting for it be resolved
-  // before giving the control back to effect generator
-  return Promise.resolve({ promise });
 }
 
 /**
